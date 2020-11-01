@@ -1,8 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
+require('dotenv').config()
 
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
-  target: 'static',
+  target: 'universal',
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -16,11 +17,14 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+  // Customize the progress-bar color
+  loading: { color: '#D81A60', height: '8px' },
+
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: [],
+  plugins: ['@/plugins/axios', { src: '@/plugins/tip-tap', ssr: false }],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -44,7 +48,9 @@ export default {
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseUrl: 'http://localhost:5000/wp-json',
+  },
 
   // Content module configuration (https://go.nuxtjs.dev/config-content)
   content: {},
@@ -66,8 +72,15 @@ export default {
         },
       },
     },
+    defaultAssets: {
+      icons: 'fa',
+    },
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {},
+  build: {
+    transpile: ['vuetify/lib', 'tiptap-vuetify'],
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    extend(config, ctx) {},
+  },
 }
