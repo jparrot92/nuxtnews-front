@@ -77,11 +77,11 @@
         <v-icon>fas fa-menu</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <v-container fluid>
         <nuxt />
       </v-container>
-    </v-content>
+    </v-main>
 
     <v-footer :fixed="fixed" app>
       <span>NuxtNews &copy; 2020</span>
